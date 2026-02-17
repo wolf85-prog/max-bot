@@ -1,0 +1,19 @@
+{
+  "name": "max-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "botmax.js",
+  "scripts": {
+    "dev": "nodemon botmax.js",
+    "start": "node botmax.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@maxhub/max-bot-api": "^0.2.2",
+    "dotenv": "^17.3.1",
+    "nodemon": "^3.1.11"
+  }
+}
