@@ -95,7 +95,7 @@ bot.on('message_created', async(ctx) => {
     const text = ctx.message ? ctx.message.body.text : ''
     //const messageId = msg.message_id
 
-    //ctx.reply(ctx.message.body.text, chatId)
+    ctx.reply(text, chatId)
     
     try {
         // команда Старт
@@ -136,3 +136,5 @@ const start = async () => {
 }
 
 start();
+
+bot.start();
