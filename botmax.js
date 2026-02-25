@@ -2,6 +2,8 @@ require("dotenv").config();
 
 //MAX api
 const { Bot } = require('@maxhub/max-bot-api');
+const express = require('express');
+const https = require('https');
 
 const token = process.env.MAX_API_TOKEN
 
@@ -11,6 +13,21 @@ const bot = new Bot(token);
 //подключение к БД PostreSQL
 const sequelize = require('./botmax/connections/db')
 const { MaxUserBot } = require('./botmax/models/models');
+
+// Certificate
+const privateKey = fs.readFileSync('privkey.pem', 'utf8'); //fs.readFileSync('/etc/letsencrypt/live/proj.uley.team/privkey.pem', 'utf8');
+const certificate = fs.readFileSync('cert.pem', 'utf8'); //fs.readFileSync('/etc/letsencrypt/live/proj.uley.team/cert.pem', 'utf8');
+const ca = fs.readFileSync('chain.pem', 'utf8'); //fs.readFileSync('/etc/letsencrypt/live/proj.uley.team/chain.pem', 'utf8');
+
+const credentials = {
+    key: privateKey,
+    cert: certificate,
+    ca: ca
+};
+
+const app = express();
+
+const httpsServer = https.createServer(credentials, app);
 
 
 // Обработчик для команды '/start'
