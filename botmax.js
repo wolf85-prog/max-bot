@@ -108,6 +108,15 @@ bot.on('message_created', async(ctx) => {
           } else {
             console.log('Отмена добавления в БД. Пользователь уже существует')
           }
+        } else {
+          //добавить пользователя в бд
+          const user = await MaxUserBot.findOne({where:{chatId: chatId.toString()}})
+          if (!user) {
+            await MaxUserBot.create({ firstname: firstname, lastname: lastname, chatId: chatId, username: '' })
+            console.log('Пользователь добавлен в БД')
+          } else {
+            console.log('Отмена добавления в БД. Пользователь уже существует')
+          }
         }
     //-----------------------------------------------------------------------------------------------
 
