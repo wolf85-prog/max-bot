@@ -70,11 +70,11 @@ bot.hears('hello', (ctx) =>
 bot.on('message_created', async(ctx) => {
   console.log("ctx: ", ctx)
     //ctx.reply(ctx.message.body.text)
-    const chatId = ctx.sender.user_id;
-    const firstname = ctx.sender.first_name
-    const lastname = ctx.sender.last_name
+    const chatId = ctx.message.sender.user_id;
+    const firstname = ctx.message.sender.first_name
+    const lastname = ctx.message.sender.last_name
     //const username = ctx.from.username
-    const message = msg.message ? msg.message : ''
+    const message = ctx.message ? ctx.message.body.text : ''
     //const messageId = msg.message_id
     
     try {
