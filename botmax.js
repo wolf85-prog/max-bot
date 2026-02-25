@@ -4,6 +4,7 @@ require("dotenv").config();
 const { Bot } = require('@maxhub/max-bot-api');
 const express = require('express');
 const https = require('https');
+const fs = require('fs');
 
 const token = process.env.MAX_API_TOKEN
 
