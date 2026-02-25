@@ -68,14 +68,17 @@ bot.hears('hello', (ctx) =>
 
 // Обработчик для любого другого сообщения
 bot.on('message_created', async(ctx) => {
-  console.log("ctx: ", ctx)
-    //ctx.reply(ctx.message.body.text)
+    //console.log("ctx: ", ctx)
+    ctx.reply(ctx.message.body.text, chatId)
+
     const chatId = ctx.message.sender.user_id;
     const firstname = ctx.message.sender.first_name
     const lastname = ctx.message.sender.last_name
     //const username = ctx.from.username
-    const message = ctx.message ? ctx.message.body.text : ''
+   //const message = ctx.message ? ctx.message.body.text : ''
     //const messageId = msg.message_id
+
+    ctx.reply(ctx.message.body.text, chatId)
     
     try {
         // команда Старт
