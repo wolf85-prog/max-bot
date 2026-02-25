@@ -74,7 +74,7 @@ bot.on('message_created', async(ctx) => {
     const firstname = ctx.message.sender.first_name
     const lastname = ctx.message.sender.last_name
     //const username = ctx.from.username
-   //const message = ctx.message ? ctx.message.body.text : ''
+    const text = ctx.message ? ctx.message.body.text : ''
     //const messageId = msg.message_id
 
     ctx.reply(ctx.message.body.text, chatId)
