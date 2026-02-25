@@ -77,7 +77,7 @@ bot.on('message_created', async(ctx) => {
     const text = ctx.message ? ctx.message.body.text : ''
     //const messageId = msg.message_id
 
-    ctx.reply(ctx.message.body.text, chatId)
+    //ctx.reply(ctx.message.body.text, chatId)
     
     try {
         // команда Старт
@@ -99,4 +99,22 @@ bot.on('message_created', async(ctx) => {
 });
 
 
-bot.start();
+//-------------------------------------------------------------------------------------------------------------------------------
+const PORT = process.env.PORT || 8081;
+
+const start = async () => {
+    try {
+        await sequelize.authenticate()
+        await sequelize.sync()
+        
+        httpsServer.listen(PORT, async() => {
+            console.log('HTTPS Server BotMax running on port ' + PORT);
+
+        });
+
+    } catch (error) {
+        console.log('Подключение к БД сломалось!', error.message)
+    }
+}
+
+start();
