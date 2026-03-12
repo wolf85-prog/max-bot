@@ -71,7 +71,7 @@ bot.on('bot_started', async(ctx) => {
   const telegramId = ctx.update.payload.split('_')[1]
 
 
-  ctx.reply('Привет! Отправь мне команду')
+  ctx.reply('Добро пожаловать!')
   
   //добавить пользователя в бд
   const user = await MaxUserBot.findOne({where:{chatId: userId.toString()}})
