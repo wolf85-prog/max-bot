@@ -104,7 +104,7 @@ bot.action('action_cancel', async (ctx) =>
 
 // Обработчик для любого другого сообщения
 bot.on('message_created', async(ctx) => {
-    //console.log("ctx: ", ctx)
+    console.log("ctx: ", ctx)
 
     const chatId = ctx.message.sender.user_id;
     const firstname = ctx.message.sender.first_name

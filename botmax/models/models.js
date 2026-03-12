@@ -7,6 +7,8 @@ const MaxUserBot = sequelize.define('maxuserbot', {
     lastname: {type: DataTypes.STRING},
     chatId: {type: DataTypes.STRING, unique: true},
     username: {type: DataTypes.STRING},
+    specId: {type: DataTypes.STRING},
+    telegramId: {type: DataTypes.STRING},
 })
 
 module.exports = {
