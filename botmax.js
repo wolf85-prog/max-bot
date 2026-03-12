@@ -60,7 +60,7 @@ bot.api.setMyCommands([
 
 // Обработчик события запуска бота
 bot.on('bot_started', async(ctx) => {
-  console.log("ctx: ", ctx)
+  //console.log("ctx: ", ctx)
 
   const userId = ctx.update.user.user_id;
   const firstname = ctx.update.user.first_name
