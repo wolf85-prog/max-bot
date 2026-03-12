@@ -67,13 +67,16 @@ bot.on('bot_started', async(ctx) => {
   const lastname = ctx.update.user.last_name
   const name = ctx.update.user.name
   const avatar = ctx.update.user.full_avatar_url
+  const specId = ctx.update.payload.split('_')[0]
+  const telegramId = ctx.update.payload.split('_')[1]
+
 
   ctx.reply('Привет! Отправь мне команду')
   
   //добавить пользователя в бд
   const user = await MaxUserBot.findOne({where:{chatId: userId.toString()}})
   if (!user) {
-    await MaxUserBot.create({ firstname: firstname, lastname: lastname, chatId: userId, username: name  })
+    await MaxUserBot.create({ firstname: firstname, lastname: lastname, chatId: userId, username: name, specId, telegramId })
     console.log('Пользователь добавлен в БД')
   } else {
     console.log('Отмена добавления в БД. Пользователь уже существует')
