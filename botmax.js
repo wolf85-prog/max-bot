@@ -62,22 +62,22 @@ bot.api.setMyCommands([
 bot.on('bot_started', async(ctx) => {
   console.log("ctx: ", ctx)
 
-  const userId = ctx.user.user_id;
-  const firstname = ctx.user.first_name
-  const lastname = ctx.user.last_name
-  const name = ctx.user.name
-  const avatar = ctx.user.full_avatar_url
+  // const userId = ctx.user.user_id;
+  // const firstname = ctx.user.first_name
+  // const lastname = ctx.user.last_name
+  // const name = ctx.user.name
+  // const avatar = ctx.user.full_avatar_url
 
   ctx.reply('Привет! Отправь мне команду')
   
   //добавить пользователя в бд
-  const user = await MaxUserBot.findOne({where:{chatId: userId.toString()}})
-  if (!user) {
-    await MaxUserBot.create({ firstname: firstname, lastname: lastname, chatId: userId, username: name  })
-    console.log('Пользователь добавлен в БД')
-  } else {
-    console.log('Отмена добавления в БД. Пользователь уже существует')
-  } 
+  // const user = await MaxUserBot.findOne({where:{chatId: userId.toString()}})
+  // if (!user) {
+  //   await MaxUserBot.create({ firstname: firstname, lastname: lastname, chatId: userId, username: name  })
+  //   console.log('Пользователь добавлен в БД')
+  // } else {
+  //   console.log('Отмена добавления в БД. Пользователь уже существует')
+  // } 
 });
 
 // Обработчик для команды '/start'
