@@ -59,7 +59,21 @@ bot.api.setMyCommands([
 ]);
 
 // Обработчик события запуска бота
-//bot.on('bot_started', (ctx) => ctx.reply('Привет! Отправь мне команду /ping, чтобы сыграть в пинг-понг'));
+bot.on('bot_started', async(ctx) => {
+  ctx.reply('Привет! Отправь мне команду')
+  
+  //добавить пользователя в бд
+  const user = await MaxUserBot.findOne({where:{chatId: chatId.toString()}})
+  if (!user) {
+    await MaxUserBot.create({ firstname: firstname, lastname: lastname, chatId: chatId, username: '' })
+    console.log('Пользователь добавлен в БД')
+  } else {
+    console.log('Отмена добавления в БД. Пользователь уже существует')
+  } 
+});
+
+// Обработчик для команды '/start'
+//bot.command('start', (ctx) => ctx.reply('Добро пожаловать!'));
 
 // Обработчик команды '/info'
 bot.command('info', (ctx) => 
