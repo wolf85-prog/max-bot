@@ -67,10 +67,10 @@ bot.on('bot_started', async(ctx) => {
   const lastname = ctx.update.user.last_name
   const name = ctx.update.user.name
   //const avatar = ctx.update.user.full_avatar_url
-  const specId = ctx.update ? ctx.update.payload.split('_')[0] : ''
-  const telegramId = ctx.update ? ctx.update.payload.split('_')[1]: ''
+  const specId = ctx.update?.payload ? ctx.update.payload.split('_')[0] : ''
+  const telegramId = ctx.update?.payload ? ctx.update.payload.split('_')[1]: ''
 
-  console.log("Добавлен специалист (specId): ", specId)
+  console.log("Добавление специалиста (specId): ", specId)
 
   ctx.reply('Добро пожаловать!')
 
