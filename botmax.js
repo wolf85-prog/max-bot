@@ -70,6 +70,7 @@ bot.on('bot_started', async(ctx) => {
   const specId = ctx.update ? ctx.update.payload.split('_')[0] : ''
   const telegramId = ctx.update ? ctx.update.payload.split('_')[1]: ''
 
+  console.log("Добавлен специалист (specId): ", specId)
 
   ctx.reply('Добро пожаловать!')
 
