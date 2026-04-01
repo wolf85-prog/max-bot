@@ -7,6 +7,7 @@ const https = require('https');
 const fs = require('fs');
 
 const token = process.env.MAX_API_TOKEN
+const chatTelegramId = process.env.CHAT_ID
 
 const bot = new Bot(token);
 
