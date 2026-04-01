@@ -15,6 +15,12 @@ const bot = new Bot(token);
 const sequelize = require('./botmax/connections/db')
 const { MaxUserBot } = require('./botmax/models/models');
 
+const sendMyMessage = require('./botmax/common/sendMyMessage');
+
+//socket.io
+const {io} = require("socket.io-client")
+const socketUrl = process.env.SOCKET_APP_URL
+
 // Certificate
 const privateKey = fs.readFileSync('privkey.pem', 'utf8'); //fs.readFileSync('/etc/letsencrypt/live/proj.uley.team/privkey.pem', 'utf8');
 const certificate = fs.readFileSync('cert.pem', 'utf8'); //fs.readFileSync('/etc/letsencrypt/live/proj.uley.team/cert.pem', 'utf8');
@@ -144,6 +150,7 @@ bot.on('message_created', async(ctx) => {
     //const username = ctx.from.username
     const text = ctx.message ? ctx.message.body.text : ''
     //const messageId = msg.message_id
+    const messageId = '' //ctx.message
 
     //ctx.reply(text, chatId)
     
@@ -159,6 +166,7 @@ bot.on('message_created', async(ctx) => {
             console.log('Отмена добавления в БД. Пользователь уже существует')
           }
         } else {
+          //получить входящее сообщение
           //добавить пользователя в бд
           const user = await MaxUserBot.findOne({where:{chatId: chatId.toString()}})
           if (!user) {
@@ -167,6 +175,34 @@ bot.on('message_created', async(ctx) => {
           } else {
             console.log('Отмена добавления в БД. Пользователь уже существует')
           }
+
+          // Подключаемся к серверу socket
+          let socket = io(socketUrl);
+          socket.emit("addUser", chatId)  
+
+          //обработка пересылаемых сообщений
+          let str_text;
+          let reply_id = '';
+          // if (ctx.reply_to_message) {
+          //     const message = await Message.findOne({where:{messageId: ctx.reply_to_message.message_id.toString()}}) 
+          //    str_text = `${message.dataValues.text}_reply_${text}`  
+          //    reply_id = msg.reply_to_message.message_id              
+          // } else {
+              str_text = text
+          //}
+
+          // сохранить отправленное боту сообщение пользователя в БД
+          const convId = sendMyMessage(str_text, 'text', chatId, messageId, reply_id)
+
+          socket.emit("sendMessageSpecMax", {
+              senderId: chatId,
+              receiverId: chatTelegramId,
+              text: str_text,
+              type: 'text',
+              convId: convId,
+              messageId: messageId,
+              replyId: reply_id,
+          })
         }
     //-----------------------------------------------------------------------------------------------
 
